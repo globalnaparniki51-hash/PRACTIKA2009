@@ -1,0 +1,109 @@
+/* Базовые настройки */
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Roboto', sans-serif; /* Можно заменить на любой другой шрифт */
+    background-color: #f9fafb;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 768px; /* Ширина контейнера для контента */
+    margin: auto;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-top: 0;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+li::before {
+    content: "• ";
+    color: #0d6efd;
+}
+
+/* Карточка товара */
+.product-card {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.product-image {
+    width: 30%;
+    min-width: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.product-info {
+    flex-grow: 1;
+}
+
+.price-block {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5em;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.currency {
+    color: #6c757d;
+}
+.deposit-notice {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.button-primary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    border-radius: 0.25rem;
+}
+
+.button-primary:hover,
+.button-primary:focus {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .product-card {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .product-image {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 1rem;
+    }
+}

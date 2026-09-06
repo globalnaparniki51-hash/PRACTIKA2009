@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточка товара</title>
+    <!-- Убедитесь, что эта строка находится строго внутри тега <head> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <!-- Главный контейнер (обязателен для центрирования) -->
+    <div class="container">
+        
+        <!-- Карточка товара (включает flex-сетку) -->
+        <div class="product-card">
+            
+            <!-- Картинка с нужным классом -->
+            <img class="product-image" src="{{ url_for('static', filename='uploads/baykal.jpg') }}" alt="Вода Бакальская глубина">
+            
+            <!-- Блок с текстом справа от картинки -->
+            <div class="product-info">
+                <h1>Артезианская вода "Байкальская глубина" л</h1>
+                
+                <div class="price-block">
+                    Цена: 450 <span class="currency">₽</span>
+                </div>
+
+                <h3>Химический состав</h3>
+                <ul>
+                    <li>Магний (Mg++): &lt;20 мг/л</li>
+                    <li>Кальций (Ca++): 23.71 мг/л</li>
+                    <li>Натрий (Na+): 50 мг/л</li>
+                    <li>Хлориды: 150 мг/л</li>
+                    <li>Сульфаты: 150 мг/л</li>
+                    <li>Бикарбонаты: 350 мг/л</li>
+                    <li>Общая жесткость: до 7°Ж</li>
+                </ul>
+                
+                <!-- Кнопка (если планируете добавить) -->
+                <button class="button-primary">Купить</button>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+</html>
