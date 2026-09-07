@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXURY WATER — PREMIUM SELECTION</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="classic-page">
+
+<!-- Жемчужная плавающая корзина -->
+<div class="cart-widget" id="cartWidget">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+    </svg>
+    <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<!-- Выкатной терминал корзины -->
+<div class="cart-modal" id="cartModal">
+    <div class="cart-modal-content">
+        <div class="cart-modal-header">
+            <h2>ТЕРМИНАЛ // КОРЗИНА</h2>
+            <button class="btn-close-cart" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-items-list" id="cartItemsList"></div>
+        <div class="cart-modal-footer">
+            <div class="cart-total-row">
+                <span>ИТОГО К ОПЛАТЕ:</span>
+                <span id="cartTotalSum">₽0</span>
+            </div>
+            <button class="btn-checkout">ОФОРМИТЬ ЗАКАЗ</button>
+            <button class="btn-clear-cart" id="clearCartBtn">ОЧИСТИТЬ КОРЗИНУ</button>
+        </div>
+    </div>
+</div>
+
+<div class="catalog-wrapper">
+    <!-- Центрированный швейцарский заголовок -->
+    <header class="store-header">
+        <h1 class="main-logo">
+            <span class="dark-premium">PREMIUM</span> 
+            <span class="neon-blue-water">WATER</span>
+        </h1>
+    </header>
+    
+    <!-- Сетка из двух парящих постер-карточек -->
+    <div class="classic-grid">
+        {% for p in products %}
+        <a href="/api/product/{{ p.id }}" class="grid-card">
+            <div class="grid-img-frame">
+                <img src="/static/images/{{ p.image }}" alt="{{ p.name }}">
+            </div>
+            <div class="grid-meta">
+                <h2>{{ p.name }}</h2>
+                <span class="classic-price">₽{{ p.price_rub }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    const cartWidget = document.getElementById('cartWidget');
+    const cartModal = document.getElementById('cartModal');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const cartCount = document.getElementById('cartCount');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTotalSum = document.getElementById('cartTotalSum');
+    const clearCartBtn = document.getElementById('clearCartBtn');
+
+    let cart = JSON.parse(localStorage.getItem('water_cart')) || [];
+
+    function updateCartUI() {
+        localStorage.setItem('water_cart', JSON.stringify(cart));
+        let totalCount = 0;
+        let totalSum = 0;
+        for (let i = 0; i < cart.length; i++) {
+            totalCount += cart[i].qty;
+            totalSum += (cart[i].price * cart[i].qty);
+        }
+        cartCount.innerText = totalCount;
+        cartTotalSum.innerText = `₽${totalSum}`;
+
+        if (cart.length === 0) {
+            cartItemsList.innerHTML = '<p class="empty-cart-text">КОРЗИНА ПУСТА</p>';
+        } else {
+            cartItemsList.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <p>₽${item.price} x ${item.qty}</p>
+                    </div>
+                    <button class="btn-delete-item" onclick="removeProduct(${item.id})">&times;</button>
+                </div>
+            `).join('');
+        }
+    }
+
+    window.removeProduct = function(id) { cart = cart.filter(item => item.id !== id); updateCartUI(); };
+    cartWidget.addEventListener('click', () => cartModal.classList.add('open'));
+    closeCartBtn.addEventListener('click', () => cartModal.classList.remove('open'));
+    clearCartBtn.addEventListener('click', () => { cart = []; updateCartUI(); });
+    updateCartUI();
+</script>
+<!-- 🔥 КИНЕТИЧЕСКИЙ СКРИПТ ПАДЕНИЯ ЛЕПЕСТКОВ САКУРЫ -->
+<script>
+    function createSakuraPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('sakura-petal');
+        
+        // Рандомный размер лепестка (от 8 до 16 пикселей)
+        const size = Math.random() * 8 + 8;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size * 1.2}px`;
+        
+        // Рандомная точка появления по горизонтали
+        petal.style.left = Math.random() * window.innerWidth + 'px';
+        
+        // Кастомные параметры падения
+        let top = -20;
+        let left = parseFloat(petal.style.left);
+        const speed = Math.random() * 1.5 + 1; // Скорость падения
+        const wind = Math.random() * 0.5 - 0.2; // Боковой ветер
+        
+        // 3D Вращение лепестка вокруг осей
+        let rotX = Math.random() * 360;
+        let rotY = Math.random() * 360;
+        let rotZ = Math.random() * 360;
+        const rotSpeedX = Math.random() * 2 - 1;
+        const rotSpeedY = Math.random() * 2 - 1;
+        const rotSpeedZ = Math.random() * 1;
+
+        document.body.appendChild(petal);
+
+        function step() {
+            top += speed;
+            left += wind + Math.sin(top / 30) * 0.5; // Эффект парения и раскачивания на ветру
+            
+            rotX += rotSpeedX;
+            rotY += rotSpeedY;
+            rotZ += rotSpeedZ;
+
+            petal.style.top = top + 'px';
+            petal.style.left = left + 'px';
+            petal.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
+
+            // Удаляем лепесток, когда он падает за экран
+            if (top < window.innerHeight) {
+                requestAnimationFrame(step);
+            } else {
+                petal.remove();
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Генерируем лепестки в реальном времени
+    setInterval(createSakuraPetal, 400);
+</script>
+
+</body>
+</html>

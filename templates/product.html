@@ -3,46 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Карточка товара</title>
-    <!-- Убедитесь, что эта строка находится строго внутри тега <head> -->
+    <title>Вода {{ product.name }} — PREMIUM SELECTION</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-<body>
+<body class="classic-page">
 
-    <!-- Главный контейнер (обязателен для центрирования) -->
-    <div class="container">
-        
-        <!-- Карточка товара (включает flex-сетку) -->
-        <div class="product-card">
-            
-            <!-- Картинка с нужным классом -->
-            <img class="product-image" src="{{ url_for('static', filename='uploads/baykal.jpg') }}" alt="Вода Бакальская глубина">
-            
-            <!-- Блок с текстом справа от картинки -->
-            <div class="product-info">
-                <h1>Артезианская вода "Байкальская глубина" л</h1>
-                
-                <div class="price-block">
-                    Цена: 450 <span class="currency">₽</span>
-                </div>
+<!-- Жемчужная плавающая корзина (Жестко зафиксирована в углу экрана) -->
+<div class="cart-widget" id="cartWidget">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+    </svg>
+    <span class="cart-count" id="cartCount">0</span>
+</div>
 
-                <h3>Химический состав</h3>
-                <ul>
-                    <li>Магний (Mg++): &lt;20 мг/л</li>
-                    <li>Кальций (Ca++): 23.71 мг/л</li>
-                    <li>Натрий (Na+): 50 мг/л</li>
-                    <li>Хлориды: 150 мг/л</li>
-                    <li>Сульфаты: 150 мг/л</li>
-                    <li>Бикарбонаты: 350 мг/л</li>
-                    <li>Общая жесткость: до 7°Ж</li>
-                </ul>
-                
-                <!-- Кнопка (если планируете добавить) -->
-                <button class="button-primary">Купить</button>
+<!-- Модальный кибер-терминал выкатной корзины -->
+<div class="cart-modal" id="cartModal">
+    <div class="cart-modal-content">
+        <div class="cart-modal-header">
+            <h2>ТЕРМИНАЛ // КОРЗИНА</h2>
+            <button class="btn-close-cart" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-items-list" id="cartItemsList"></div>
+        <div class="cart-modal-footer">
+            <div class="cart-total-row">
+                <span>ИТОГО К ОПЛАТЕ:</span>
+                <span id="cartTotalSum">₽0</span>
             </div>
-            
+            <button class="btn-checkout">ОФОРМИТЬ ЗАКАЗ</button>
+            <button class="btn-clear-cart" id="clearCartBtn">ОЧИСТИТЬ КОРЗИНУ</button>
         </div>
     </div>
+</div>
+
+<!-- 🔥 РОСКОШНЫЙ ВЕРТИКАЛЬНЫЙ МАРКЕТИНГОВЫЙ ЛОНГРИД (СТРОГО СВЕРХУ ВНИЗ) -->
+<div class="longread-container">
+    <a href="/" class="back-link">← НАЗАД НА ВИТРИНУ КАТАЛОГА</a>
+
+    <!-- Секция 1: Полноэкранный постер бутылки и заголовок -->
+    <section class="longread-hero">
+        {% if product.image %}
+            <img src="/static/images/{{ product.image }}" alt="{{ product.name }}" class="product-image">
+        {% else %}
+            <p class="no-image">Изображение отсутствует.</p>
+        {% endif %}
+        <h1 class="product-title">АРТЕЗИАНСКАЯ ВОДА "{{ product.name }}"</h1>
+        <p class="product-tagline-text">{{ product.tagline }}</p>
+    </section>
+
+    <!-- Секция 2: Коммерческий блок стоимости и заказа -->
+    <section class="longread-section glass-panel sec-1">
+        <div class="price-block">
+            <div class="main-price">Эксклюзивная стоимость: <span class="classic-price-value">₽{{ product.price_rub }}</span></div>
+            {% if product.deposit %}
+                <small class="deposit-info">Залог за тару: <span class="cyan-text">₽{{ product.deposit }}</span> (возвратный)</small>
+            {% endif %}
+        </div>
+        <button class="button-add-to-cart" id="addToCartBtn">Добавить в заказной лист</button>
+    </section>
+
+    <!-- Секция 3: Описание источника и философия бренда -->
+    <section class="longread-section sec-2">
+        <h2 class="section-block-title">ОПИСАНИЕ ИСТОЧНИКА</h2>
+        <p class="section-paragraph">{{ product.desc }}</p>
+    </section>
+
+    <!-- Секция 4: Историческое наследие происхождения -->
+    <section class="longread-section glass-panel sec-3">
+        <h2 class="section-block-title">НАСЛЕДИЕ И ПРОИСХОЖДЕНИЕ</h2>
+        <p class="section-paragraph">{{ product.history }}</p>
+    </section>
+
+    <!-- Секция 5: Уникальный геологический терруар пластов -->
+    <section class="longread-section sec-4">
+        <h2 class="section-block-title">ГЕОЛОГИЧЕСКИЙ ТЕРРУАР</h2>
+        <p class="section-paragraph">{{ product.terroir }}</p>
+    </section>
+
+    <!-- Секция 6: Гастрономический этикет подачи (Fine Dining) -->
+    <section class="longread-section glass-panel sec-5">
+        <h2 class="section-block-title">ГАСТРОНОМИЧЕСКИЙ ЭТИКЕТ</h2>
+        <p class="section-paragraph">{{ product.etiquette }}</p>
+    </section>
+
+    <!-- Секция 7: Биологическое и медицинское воздействие -->
+    <section class="longread-section sec-6">
+        <h2 class="section-block-title">БИОЛОГИЧЕСКОЕ ВОЗДЕЙСТВИЕ</h2>
+        <p class="section-paragraph">{{ product.medical }}</p>
+    </section>
+
+    <!-- Секция 8: Развернутая интерактивная таблица хим-состава -->
+    <section class="longread-section glass-panel sec-7">
+        <h2 class="section-block-title">ЛАБОРАТОРНЫЙ АНАЛИЗ КОМПОЗИЦИИ</h2>
+        <ul class="composition-list">
+            {% for item in product.specs %}
+            <li><span>{{ item[0] }}</span> <strong>{{ item[1] }}</strong></li>
+            {% endfor %}
+            <li><span>Общая минерализация (TDS)</span> <strong>Сбалансированная</strong></li>
+            <li><span>Природный баланс pH</span> <strong>Идеальный нейтральный</strong></li>
+            <li><span>Общая жесткость</span> <strong>до 7°Ж</strong></li>
+        </ul>
+    </section>
+    
+    <!-- Подвал страницы -->
+    <footer class="longread-footer">
+        <p>© 2026 LUCKY LIQUIDS INDUSTRIAL. ALL RIGHTS RESERVED.</p>
+    </footer>
+</div>
+
+<script>
+    // Подтягиваем данные текущего товара из контекста Flask
+    const currentProduct = { id: {{ product.id }}, name: "{{ product.name }}", price: {{ product.price_rub }} };
+    
+    // Элементы управления корзиной
+    const cartWidget = document.getElementById('cartWidget');
+    const cartModal = document.getElementById('cartModal');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const cartCount = document.getElementById('cartCount');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTotalSum = document.getElementById('cartTotalSum');
+    const clearCartBtn = document.getElementById('clearCartBtn');
+
+    let cart = JSON.parse(localStorage.getItem('water_cart')) || [];
+
+    // Железобетонная сборка UI корзины без багов
+    function updateCartUI() {
+        localStorage.setItem('water_cart', JSON.stringify(cart));
+        let totalCount = 0;
+        let totalSum = 0;
+        for (let i = 0; i < cart.length; i++) {
+            totalCount += cart[i].qty;
+            totalSum += (cart[i].price * cart[i].qty);
+        }
+        cartCount.innerText = totalCount;
+        cartTotalSum.innerText = `₽${totalSum}`;
+
+        if (cart.length === 0) {
+            cartItemsList.innerHTML = '<p class="empty-cart-text">КОРЗИНА ПУСТА</p>';
+        } else {
+            cartItemsList.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <p>₽${item.price} x ${item.qty}</p>
+                    </div>
+                    <button class="btn-delete-item" onclick="removeProduct(${item.id})">&times;</button>
+                </div>
+            `).join('');
+        }
+    }
+
+    // Удаление товара из корзины
+    window.removeProduct = function(id) { 
+        cart = cart.filter(item => item.id !== id); 
+        updateCartUI(); 
+    };
+
+    // Добавление товара по клику на кнопку
+    addToCartBtn.addEventListener('click', () => {
+        const exist = cart.find(item => item.id === currentProduct.id);
+        if (exist) { 
+            exist.qty++; 
+        } else { 
+            cart.push({ id: currentProduct.id, name: currentProduct.name, price: currentProduct.price, qty: 1 }); 
+        }
+        updateCartUI();
+        
+        // Эффект успешного добавления
+        addToCartBtn.style.background = '#00ff66';
+        addToCartBtn.style.color = '#000000';
+        addToCartBtn.innerText = 'УСПЕШНО ДОБАВЛЕНО!';
+        setTimeout(() => { 
+            addToCartBtn.style.background = ''; 
+            addToCartBtn.style.color = ''; 
+            addToCartBtn.innerText = 'ДОБАВИТЬ В КОРЗИНУ'; 
+        }, 800);
+    });
+
+    // Слушатели событий клика для выкатной панели
+    cartWidget.addEventListener('click', () => cartModal.classList.add('open'));
+    closeCartBtn.addEventListener('click', () => cartModal.classList.remove('open'));
+    clearCartBtn.addEventListener('click', () => { cart = []; updateCartUI(); });
+    
+    // Первичный запуск при загрузке
+    updateCartUI();
+</script>
+<!-- 🔥 КИНЕТИЧЕСКИЙ СКРИПТ ПАДЕНИЯ ЛЕПЕСТКОВ САКУРЫ -->
+<script>
+    function createSakuraPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('sakura-petal');
+        
+        // Рандомный размер лепестка (от 8 до 16 пикселей)
+        const size = Math.random() * 8 + 8;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size * 1.2}px`;
+        
+        // Рандомная точка появления по горизонтали
+        petal.style.left = Math.random() * window.innerWidth + 'px';
+        
+        // Кастомные параметры падения
+        let top = -20;
+        let left = parseFloat(petal.style.left);
+        const speed = Math.random() * 1.5 + 1; // Скорость падения
+        const wind = Math.random() * 0.5 - 0.2; // Боковой ветер
+        
+        // 3D Вращение лепестка вокруг осей
+        let rotX = Math.random() * 360;
+        let rotY = Math.random() * 360;
+        let rotZ = Math.random() * 360;
+        const rotSpeedX = Math.random() * 2 - 1;
+        const rotSpeedY = Math.random() * 2 - 1;
+        const rotSpeedZ = Math.random() * 1;
+
+        document.body.appendChild(petal);
+
+        function step() {
+            top += speed;
+            left += wind + Math.sin(top / 30) * 0.5; // Эффект парения и раскачивания на ветру
+            
+            rotX += rotSpeedX;
+            rotY += rotSpeedY;
+            rotZ += rotSpeedZ;
+
+            petal.style.top = top + 'px';
+            petal.style.left = left + 'px';
+            petal.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
+
+            // Удаляем лепесток, когда он падает за экран
+            if (top < window.innerHeight) {
+                requestAnimationFrame(step);
+            } else {
+                petal.remove();
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Генерируем лепестки в реальном времени
+    setInterval(createSakuraPetal, 400);
+</script>
 
 </body>
 </html>
