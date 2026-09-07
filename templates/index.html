@@ -106,59 +106,49 @@
     clearCartBtn.addEventListener('click', () => { cart = []; updateCartUI(); });
     updateCartUI();
 </script>
-<!-- 🔥 КИНЕТИЧЕСКИЙ СКРИПТ ПАДЕНИЯ ЛЕПЕСТКОВ САКУРЫ -->
+
 <script>
     function createSakuraPetal() {
         const petal = document.createElement('div');
         petal.classList.add('sakura-petal');
-        
-        // Рандомный размер лепестка (от 8 до 16 пикселей)
         const size = Math.random() * 8 + 8;
         petal.style.width = `${size}px`;
         petal.style.height = `${size * 1.2}px`;
-        
-        // Рандомная точка появления по горизонтали
         petal.style.left = Math.random() * window.innerWidth + 'px';
         
-        // Кастомные параметры падения
         let top = -20;
         let left = parseFloat(petal.style.left);
-        const speed = Math.random() * 1.5 + 1; // Скорость падения
-        const wind = Math.random() * 0.5 - 0.2; // Боковой ветер
+        const speed = Math.random() * 1.5 + 1;
+        const wind = Math.random() * 0.5 - 0.2;
         
-        // 3D Вращение лепестка вокруг осей
         let rotX = Math.random() * 360;
         let rotY = Math.random() * 360;
         let rotZ = Math.random() * 360;
         const rotSpeedX = Math.random() * 2 - 1;
         const rotSpeedY = Math.random() * 2 - 1;
         const rotSpeedZ = Math.random() * 1;
-
+        
         document.body.appendChild(petal);
-
+        
         function step() {
             top += speed;
-            left += wind + Math.sin(top / 30) * 0.5; // Эффект парения и раскачивания на ветру
-            
-            rotX += rotSpeedX;
-            rotY += rotSpeedY;
+            left += wind + Math.sin(top / 30) * 0.5;
+            rotX += rotSpeedX; 
+            rotY += rotSpeedY; 
             rotZ += rotSpeedZ;
-
+            
             petal.style.top = top + 'px';
             petal.style.left = left + 'px';
             petal.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
-
-            // Удаляем лепесток, когда он падает за экран
-            if (top < window.innerHeight) {
-                requestAnimationFrame(step);
-            } else {
-                petal.remove();
+            
+            if (top < window.innerHeight) { 
+                requestAnimationFrame(step); 
+            } else { 
+                petal.remove(); 
             }
         }
         requestAnimationFrame(step);
     }
-
-    // Генерируем лепестки в реальном времени
     setInterval(createSakuraPetal, 400);
 </script>
 

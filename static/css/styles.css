@@ -26,15 +26,14 @@ html {
 }
 
 body.classic-page {
-    /* Добавили максимум пастельной воздушности с белым молоком и розовым шёлком */
     background: linear-gradient(-45deg, #fffcfc, #fae9ed, #fdfbfd, #f1e2e6, #ffffff);
     background-size: 400% 400%;
-    animation: delicatePinkBg 20s ease infinite; /* Замедленная до 20 секунд плавная кинетика дыхания фона */
+    animation: delicatePinkBg 20s ease infinite;
     font-family: 'Montserrat', sans-serif;
     color: #2c323e;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Разрешаем свободный вертикальный скролл лонгридов */
+    align-items: flex-start;
     min-height: 100vh;
     width: 100%;
     padding: 90px 24px;
@@ -43,7 +42,6 @@ body.classic-page {
     overflow-y: auto;
 }
 
-/* Оптимизация отображения ссылок и кнопок браузера */
 a {
     color: inherit;
     text-decoration: none;
@@ -66,7 +64,6 @@ button {
     border: none;
 }
 
-/* Сглаживание полосы прокрутки под нежный лепестковый стиль */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -82,17 +79,17 @@ button {
     background: rgba(210, 145, 188, 0.4);
 }
 
-/* СТИЛИ ДЛЯ РЕАЛИСТИЧНЫХ ПАДАЮЩИХ ЛЕПЕСТКОВ САКУРЫ */
 .sakura-petal {
     position: fixed;
     top: -20px;
     background: linear-gradient(135deg, #ffccd5 0%, #ffafbd 100%);
-    border-radius: 95% 10% 95% 30% / 95% 30% 95% 10%; /* Форма настоящего лепестка */
+    border-radius: 95% 10% 95% 30% / 95% 30% 95% 10%;
     pointer-events: none;
     z-index: 9999;
     opacity: 0.85;
     transform-style: preserve-3d;
 }
+
 /* ==========================================================================
    2. СТУДИЙНАЯ КИНЕТИКА И КАСКАДНЫЙ BLUR-FADE СТРАНИЦЫ ТОВАРА
    ========================================================================== */
@@ -100,7 +97,7 @@ button {
     from { 
         opacity: 0; 
         transform: translateY(35px); 
-        filter: blur(25px); /* Элитный фокус из тумана в стиле Lucky-Leads */
+        filter: blur(25px);
     }
     to { 
         opacity: 1; 
@@ -124,7 +121,7 @@ button {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 60px; /* Много люксового воздуха между разделами лонгрида */
+    gap: 60px;
     position: relative;
     z-index: 5;
 }
@@ -158,6 +155,7 @@ button {
     justify-content: center;
     animation: luckyBlurFade 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
 /* ==========================================================================
    3. ГЛЯНЦЕВОЕ ОРГСТЕКЛО, ТЕКСТОВЫЕ БЛОКИ И КАСКАДНЫЕ ЗАДЕРЖКИ СЛОЕВ
    ========================================================================== */
@@ -168,11 +166,8 @@ button {
     max-height: 440px;
     margin: 0 auto 35px auto;
     object-fit: contain;
-    mix-blend-mode: multiply; /* Намертво впекает плохие края фоток в нежный фон */
-    
-    /* 🔥 РЕАЛИСТИЧНОЕ ПРЕМИУМ-СКРУГЛЕНИЕ ФОТОГРАФИИ БУТЫЛКИ */
+    mix-blend-mode: multiply;
     border-radius: 24px; 
-    
     filter: drop-shadow(0 35px 70px rgba(163, 140, 147, 0.15));
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateZ(0);
@@ -206,9 +201,8 @@ button {
     transition: all 0.4s ease;
 }
 
-/* Glassmorphism 2.0 — жемчужные полупрозрачные плиты */
 .longread-section.glass-panel {
-    background: rgba(255, 255, 255, 0.35); /* Нежная матовая прозрачность */
+    background: rgba(255, 255, 255, 0.35);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     padding: 45px;
@@ -250,7 +244,6 @@ button {
     animation: expandHrLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Каскадный тайминг выплывания слоев поочередно для живого эффекта */
 .longread-container .sec-1 { animation: luckyBlurFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.1s; }
 .longread-container .sec-2 { animation: luckyBlurFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.22s; }
 .longread-container .sec-3 { animation: luckyBlurFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.34s; }
@@ -267,6 +260,7 @@ button {
     padding-top: 20px; 
     padding-bottom: 40px; 
 }
+
 /* ==========================================================================
    4. ТВОИ РОДНЫЕ СПЛОШНЫЕ БЕЛЫЕ ЦЕНЫ, ТАБЛИЦА И СТРУКТУРА ВИТРИНЫ
    ========================================================================== */
@@ -284,12 +278,11 @@ button {
     color: #8c93a1; 
 }
 
-/* ИСХОДНЫЕ СПЛОШНЫЕ ЦЕНЫ С РОСКОШНЫМ ИНТЕРАКТИВНЫМ ПЕРЕЛИВОМ */
 .classic-price, .classic-price-value {
     font-family: 'Montserrat', sans-serif;
     font-size: 2.3rem;
     font-weight: 700;
-    color: #2c323e !important; /* Настоящий плотный благородный цвет букв */
+    color: #2c323e !important;
     letter-spacing: -1.5px;
     transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
 }
@@ -378,7 +371,6 @@ button {
     animation: luckyBlurFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; 
 }
 
-
 /* ==========================================================================
    5. ДВУХЦВЕТНЫЙ ТОП-ЛОГОТИП ИЗ ТОП-10 (ЧЁРНЫЙ PREMIUM // СВЕТЛЫЙ WATER)
    ========================================================================== */
@@ -394,26 +386,25 @@ button {
 }
 
 .dark-premium { 
-    color: #f5eef1 !important; /* Полное слияние с пастельно-зефирным фоном */
-    -webkit-text-stroke: 1.5px #2c323e; /* Матовый строгий контур букв */
+    color: #f5eef1 !important;
+    -webkit-text-stroke: 1.5px #2c323e;
     letter-spacing: 4px; 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 
 .neon-blue-water { 
-    color: #2c323e !important; /* Плотный благородный тёмный оттенок */
+    color: #2c323e !important;
     font-weight: 900; 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Дорогой интерактивный эффект при наведении на логотип */
 .store-header:hover .dark-premium { 
     color: #2c323e !important; 
     -webkit-text-stroke: 1.5px transparent;
 }
 
 .store-header:hover .neon-blue-water {
-    color: #d291bc !important; /* Мягкий налив пудрово-розовым цветом */
+    color: #d291bc !important;
 }
 
 /* ==========================================================================
@@ -421,14 +412,13 @@ button {
    ========================================================================== */
 .classic-grid { 
     display: grid; 
-    grid-template-columns: repeat(2, 1fr); /* Ровно 2 карточки в ряд */
+    grid-template-columns: repeat(2, 1fr);
     gap: 45px; 
     width: 100%;
     position: relative;
     z-index: 2;
 }
 
-/* Парящие глянцевые карточки-постеры (Glassmorphism 2.0) */
 .grid-card {
     background: rgba(255, 255, 255, 0.45); 
     border: 1px solid rgba(255, 255, 255, 0.8); 
@@ -449,18 +439,15 @@ button {
                 transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Плавный поочередный выезд карточек витрины друг за другом */
 .classic-grid a:nth-child(1) { animation-delay: 0.15s; }
 .classic-grid a:nth-child(2) { animation-delay: 0.32s; }
 
-/* Ховер-эффект парения: карточка приподнимается, а тень мягко рассеивается */
 .grid-card:hover { 
     border-color: rgba(255, 255, 255, 0.95); 
     box-shadow: 0 45px 85px rgba(163, 140, 147, 0.13); 
     transform: translateY(-10px) scale(1.01); 
 }
 
-/* Рамка для центрирования изображения внутри парящей ячейки */
 .grid-img-frame { 
     width: 100%; 
     height: 390px; 
@@ -469,7 +456,7 @@ button {
     align-items: center; 
     margin-bottom: 25px; 
     background: rgba(255, 255, 255, 0.4); 
-    border-radius: 20px; /* Реалистичное скругление ячеек под воду */
+    border-radius: 20px;
     overflow: hidden; 
     border: 1px solid rgba(255, 255, 255, 0.5); 
     position: relative;
@@ -486,16 +473,14 @@ button {
     max-height: 100%; 
     object-fit: contain; 
     padding: 15px; 
-    mix-blend-mode: multiply; /* Убирает белые края у картинок бутылок */
+    mix-blend-mode: multiply;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 
-/* Бутылка плавно наезжает вперёд при наведении на ячейку */
 .grid-card:hover .grid-img-frame img { 
     transform: scale(1.05) translateY(-6px); 
 }
 
-/* Мета-информация внизу ячейки */
 .grid-meta { 
     display: flex; 
     justify-content: space-between; 
@@ -511,6 +496,7 @@ button {
     color: #2c323e; 
     letter-spacing: -0.3px; 
 }
+
 /* ==========================================================================
    7. КОРЗИНА (ЖЕСТКАЯ ФИКСАЦИЯ, СКРУГЛЕНИЕ SQUIRCLE И ПОЛНАЯ КЛИКАБЕЛЬНОСТЬ)
    ========================================================================== */
@@ -524,7 +510,7 @@ button {
     -webkit-backdrop-filter: blur(15px) !important;
     color: #2c323e !important; 
     padding: 14px !important; 
-    border-radius: 16px !important; /* Мягкий премиальный квадрат (Squircle) */
+    border-radius: 16px !important;
     display: flex !important; 
     align-items: center !important; 
     justify-content: center !important;
@@ -554,7 +540,6 @@ button {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Иконка сумки внутри виджета деликатно покачивается при наведении */
 .cart-widget:hover svg {
     transform: rotate(-8deg) scale(1.05);
 }
@@ -576,7 +561,6 @@ button {
     box-shadow: 0 4px 10px rgba(44, 50, 62, 0.15);
 }
 
-/* Выкатной белый глянцевый терминал модалки корзины */
 .cart-modal {
     position: fixed !important; 
     top: 0 !important; 
@@ -770,4 +754,122 @@ button {
     .classic-price, .classic-price-value { font-size: 1.8rem; }
     .cart-modal { width: 100% !important; right: -100% !important; }
     .btn-checkout { padding: 15px; }
+}/* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ФОРМЫ, ОВЕРЛЕЯ И ОБРАТНОЙ СВЯЗИ ===== */
+
+#checkoutFormView {
+    flex-grow: 1;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#checkoutFormView input:focus {
+    border-color: #d291bc !important;
+    box-shadow: 0 0 0 3px rgba(210, 145, 188, 0.12);
+    background: #ffffff;
+}
+
+.success-overlay.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.success-overlay.visible .success-box {
+    transform: scale(1) !important;
+}
+
+.feedback-overlay.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.feedback-overlay.visible .feedback-box {
+    transform: scale(1) !important;
+}
+
+.feedback-box input:focus,
+.feedback-box textarea:focus {
+    border-color: #d291bc !important;
+    background: #ffffff !important;
+}
+
+.btn-feedback {
+    width: 100%;
+    background: transparent;
+    color: #8c93a1;
+    border: 1px solid rgba(44, 50, 62, 0.08);
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.btn-feedback:hover {
+    color: #2c323e;
+    border-color: #2c323e;
+}/* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ФОРМЫ, ОВЕРЛЕЯ И ОБРАТНОЙ СВЯЗИ ===== */
+
+#checkoutFormView {
+    flex-grow: 1;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#checkoutFormView input:focus {
+    border-color: #d291bc !important;
+    box-shadow: 0 0 0 3px rgba(210, 145, 188, 0.12);
+    background: #ffffff;
+}
+
+.success-overlay.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.success-overlay.visible .success-box {
+    transform: scale(1) !important;
+}
+
+.feedback-overlay.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.feedback-overlay.visible .feedback-box {
+    transform: scale(1) !important;
+}
+
+.feedback-box input:focus,
+.feedback-box textarea:focus {
+    border-color: #d291bc !important;
+    background: #ffffff !important;
+}
+
+.btn-feedback {
+    width: 100%;
+    background: transparent;
+    color: #8c93a1;
+    border: 1px solid rgba(44, 50, 62, 0.08);
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.btn-feedback:hover {
+    color: #2c323e;
+    border-color: #2c323e;
+}
+
+.feedback-box .btn-submit-feedback:hover {
+    background: #d291bc !important;
 }
