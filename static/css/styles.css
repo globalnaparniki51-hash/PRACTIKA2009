@@ -872,4 +872,37 @@ button {
 
 .feedback-box .btn-submit-feedback:hover {
     background: #d291bc !important;
+}/* ===== КНОПКА ДОБАВЛЕНИЯ В КАРТОЧКЕ НА ГЛАВНОЙ ===== */
+.btn-add-from-catalog {
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(44, 50, 62, 0.08);
+    background: #2c323e;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-add-from-catalog:hover {
+    background: #d291bc;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(210, 145, 188, 0.25);
+}
+
+/* Карточка чтобы не ломалась */
+.grid-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-card-link {
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
 }
